@@ -1,13 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+    Layout,
+    Button
+} from 'antd';
+import AppHeader from "./components/AppHeader";
 
-const App=()=>{
+const App = () => {
     return (
-        <h1>
-            hot module replacement
-        </h1>
+        <Layout>
+            <Layout.Header>
+                <AppHeader/>
+            </Layout.Header>
+            <Layout.Content>
+                <Button type={"primary"}>123</Button>
+            </Layout.Content>
+        </Layout>
     )
 };
 
-ReactDOM.render(<App/>,document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
 

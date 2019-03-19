@@ -28,13 +28,14 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: path.resolve(__dirname, 'node_modules'),
+                exclude: path.resolve(__dirname, '../node_modules'),
                 use: {
                     loader: 'babel-loader'
                 }
             },
             {
                 test: /\.(css|scss|less)$/,
+                exclude: path.resolve(__dirname, '../node_modules'),
                 use: [
                     {loader: 'style-loader'},
                     {
@@ -43,9 +44,17 @@ module.exports = {
                             camelCase: true,
                             modules: true
                         }
-                    }
+                    },
                 ]
-            }
+            },
+            {
+                test: /\.css$/,
+                exclude: path.resolve(__dirname, '../src'),
+                use: [
+                    {loader: "style-loader"},
+                    {loader: "css-loader"}
+                ]
+            },
         ]
     },
     externals: {
