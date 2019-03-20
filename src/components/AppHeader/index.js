@@ -1,11 +1,15 @@
 import React from 'react';
 import styles from './index.scss';
+import {
+    Layout,
+} from 'antd';
 
+const {Header}=Layout;
 const AppHeader=()=>{
     return (
-        <div className={styles["app-header"]}>
+        <Header className={styles["app-header"]}>
 
-        </div>
+        </Header>
     )
 };
 
