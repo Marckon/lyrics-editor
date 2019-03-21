@@ -1,4 +1,4 @@
-import React, {useContext, useRef,useEffect,useState} from 'react';
+import React, {useContext, useRef,useState} from 'react';
 import {
     Upload,
     Icon,
@@ -29,7 +29,7 @@ const Player = (props) => {
     const ctx = useContext(MusicContext);
     const audio = useRef(null);
 
-    //局部状态更新
+    //局部状态更新（局部更新可以保证只有当前组件更新，编辑器中的时间戳可以在歌曲播放时正常操作）
    const [tempCurrentTime,setTempCurrenTime]=useState(0);
     //定义dragger的参数
     const draggerProps = {

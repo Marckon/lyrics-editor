@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext,useState} from 'react';
 import EditorPanel from "./EditorPanel";
 import TextLine from "./TextLine";
 import styles from './index.scss';
@@ -12,11 +12,18 @@ import {
     clearAllTextLines, deleteLine
 } from "../../actions/lyricActions";
 import {setMusicCurrent, setMusicPlay} from "../../actions/musicActions";
+import {
+    Modal,
+    Button
+} from 'antd';
 
 const Editor = (props) => {
     const mctx = useContext(MusicContext);
     const lctx=useContext(LyricContext);
     let audio=mctx.musicState.audio;
+
+    //展示歌词文件对话框
+    const [showFileModal,setShowFileModal]=useState(false);
 
     //播放暂停
     const setPlayPause=()=>{
@@ -53,13 +60,36 @@ const Editor = (props) => {
         mctx.dispatch(setMusicPlay(true));
         mctx.musicState.audio.current.play();
     };
+    //生成歌词文件
+    const generateFile=()=>{
+        setShowFileModal(true);
+    };
+    //保存歌词文件
+    const downloadFile=()=>{
+
+    };
     return (
         <div className={props.className}>
+            <Modal
+                title={"歌词文件预览"}
+                visible={showFileModal}
+                onOk={downloadFile}
+                onCancel={()=>setShowFileModal(false)}
+            >
+                {
+                    lctx.lyricState.timeStamps.map((v,i)=>{
+                        return (
+                            <p key={`line-${i}`}>{`[${v}] ${lctx.lyricState.textLines[i]}`}</p>
+                        )
+                    })
+                }
+            </Modal>
             <EditorPanel
                 className={styles["editor-panel"]}
                 stampTime={stampTime}
                 clearAllLines={clearAllLines}
                 setPlayPause={setPlayPause}
+                generateFile={generateFile}
             />
             <div className={styles.textLinesArea}>
                 {

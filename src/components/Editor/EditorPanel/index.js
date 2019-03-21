@@ -16,6 +16,7 @@ const EditorPanel = (props) => {
             <Popconfirm placement={"top"} onConfirm={props.clearAllLines} title={"确认清空所有歌词？"} okText={"确定"} cancelText={"取消"}>
                 <Button type={"danger"}>清空</Button>
             </Popconfirm>
+            <Button icon={"download"} type={"primary"} onClick={props.generateFile}>生成歌词文件</Button>
         </div>
 
     )
