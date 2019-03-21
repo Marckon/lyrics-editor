@@ -26,7 +26,7 @@ const Editor = (props) => {
     };
     //插入时间戳
     const stampTime = () => {
-        lctx.dispatch(appendTimeStamp(`${getMinInMs(mctx.musicState.currentTime)}:${getSecInMs(mctx.musicState.currentTime)}.${getMsInMs(mctx.musicState.currentTime)}`));
+        lctx.dispatch(appendTimeStamp(`${getMinInMs(mctx.musicState.audio.current.currentTime)}:${getSecInMs(mctx.musicState.audio.current.currentTime)}.${getMsInMs(mctx.musicState.audio.current.currentTime)}`));
         lctx.dispatch(appendTextLine(1))
     };
     //删除行
@@ -51,7 +51,6 @@ const Editor = (props) => {
         console.log(targetTime)
         mctx.dispatch(setMusicCurrent(targetTime));
         mctx.dispatch(setMusicPlay(true));
-        mctx.musicState.audio.current.currentTime=targetTime;
         mctx.musicState.audio.current.play();
     };
     return (

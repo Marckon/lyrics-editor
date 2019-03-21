@@ -1,4 +1,4 @@
-import React, {useContext, useRef} from 'react';
+import React, {useContext, useRef,useEffect,useState} from 'react';
 import {
     Upload,
     Icon,
@@ -29,6 +29,8 @@ const Player = (props) => {
     const ctx = useContext(MusicContext);
     const audio = useRef(null);
 
+    //局部状态更新
+   const [tempCurrentTime,setTempCurrenTime]=useState(0);
     //定义dragger的参数
     const draggerProps = {
         multiple: false,
@@ -51,18 +53,16 @@ const Player = (props) => {
         ctx.dispatch(setAudioElement(audio));
     };
     //播放时
-    const timeUpdate = ev => {
-        let music = ev.target;
-        //更新当前时间
-        ctx.dispatch(setMusicCurrent(music.currentTime));
+    const timeUpdate=()=>{
+        setTempCurrenTime(ctx.musicState.audio.current.currentTime);
     };
     //跳转播放
     const changeCurrent = value => {
-        audio.current.currentTime = value / 100 * ctx.musicState.duration;
+        ctx.dispatch(setMusicCurrent(value / 100 * ctx.musicState.duration));
     };
     //进度条提示格式
     const tipFormatter = value => {
-        let ms = value / 100 * ctx.musicState.duration;
+        let ms = value / 100 * ctx.musicState.audio.current.duration;
         return `${getMinInMs(ms)}:${getSecInMs(ms)}:${getMsInMs(ms)}`;
     };
     //设置播放暂停
@@ -122,15 +122,19 @@ const Player = (props) => {
             {/*进度条*/}
             <Row type={"flex"} align={"middle"}>
                 <Col span={20}>
-                    <Slider
-                        value={ctx.musicState.currentTime / ctx.musicState.duration * 100}
-                        onChange={changeCurrent}
-                        step={0.01}
-                        tipFormatter={tipFormatter}/>
+                    {
+                        ctx.musicState.audio&&<Slider
+                            value={tempCurrentTime / ctx.musicState.audio.current.duration * 100}
+                            onChange={changeCurrent}
+                            step={0.01}
+                            tipFormatter={tipFormatter}/>
+                    }
                 </Col>
                 <Col span={4}>
-                    <span
-                    >{getMinInMs(ctx.musicState.currentTime)}:{getSecInMs(ctx.musicState.currentTime)}/{getMinInMs(ctx.musicState.duration)}:{getSecInMs(ctx.musicState.duration)}</span>
+                    {
+                            ctx.musicState.audio&&
+                            <span>{getMinInMs(tempCurrentTime)}:{getSecInMs(tempCurrentTime)}/{getMinInMs(ctx.musicState.audio.current.duration)}:{getSecInMs(ctx.musicState.audio.current.duration)}</span>
+                    }
                 </Col>
             </Row>
         </div>

@@ -13,6 +13,7 @@ export const musicReducer = (state, action) => {
         case SET_MUSIC_SRC:
             return Object.assign({}, state, {src: action.src});
         case SET_MUSIC_CURRENT:
+            state.audio.current.currentTime=action.currentTime;
             return Object.assign({}, state, {currentTime: action.currentTime});
         case SET_MUSIC_PLAY:
             return Object.assign({}, state, {isPlay: action.isPlay});
