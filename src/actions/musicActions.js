@@ -5,6 +5,7 @@ export const SET_MUSIC_CURRENT = "SET_MUSIC_CURRENT";
 export const SET_MUSIC_NAME = "SET_MUSIC_NAME";
 export const SET_MUSIC_ARTIST = "SET_MUSIC_ARTIST";
 export const SET_MUSIC_VOLUME="SET_MUSIC_VOLUME";
+export const SET_AUDIO_ELEMENT="SET_AUDIO_ELEMENT";
 
 const setMusicSrc = src => ({
     type: SET_MUSIC_SRC,
@@ -39,7 +40,12 @@ const setMusicArtist = artist => ({
 const setMusicVolume=vol=>({
     type:SET_MUSIC_VOLUME,
     volume:vol
-})
+});
+
+const setAudioElement=ele=>({
+    type:SET_AUDIO_ELEMENT,
+    audio:ele
+});
 
 export {
     setMusicCurrent,
@@ -48,5 +54,6 @@ export {
     setMusicSrc,
     setMusicArtist,
     setMusicName,
-    setMusicVolume
+    setMusicVolume,
+    setAudioElement
 };

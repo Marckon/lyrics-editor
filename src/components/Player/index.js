@@ -9,7 +9,14 @@ import {
     Popover
 } from 'antd'
 import {MusicContext} from "../../index";
-import {setMusicCurrent, setMusicDuration, setMusicName, setMusicPlay, setMusicSrc} from "../../actions/musicActions";
+import {
+    setAudioElement,
+    setMusicCurrent,
+    setMusicDuration,
+    setMusicName,
+    setMusicPlay,
+    setMusicSrc
+} from "../../actions/musicActions";
 import {
     getSecInMs,
     getMinInMs,
@@ -41,7 +48,7 @@ const Player = (props) => {
         let music = ev.target;
         //设置音乐时长
         ctx.dispatch(setMusicDuration(music.duration));
-
+        ctx.dispatch(setAudioElement(audio));
     };
     //播放时
     const timeUpdate = ev => {

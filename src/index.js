@@ -23,6 +23,7 @@ const App = () => {
         duration: 0,
         isPlay: true,
         currentTime: 0,
+        audio:null
     });
     //歌词上下文
     const [lyricState, lyricDispatch] = useReducer(lyricReducer, {

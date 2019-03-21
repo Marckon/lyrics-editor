@@ -1,4 +1,5 @@
 import {
+    SET_AUDIO_ELEMENT,
     SET_MUSIC_ARTIST,
     SET_MUSIC_CURRENT,
     SET_MUSIC_DURATION, SET_MUSIC_NAME,
@@ -21,6 +22,8 @@ export const musicReducer = (state, action) => {
             return Object.assign({}, state, {artist: action.artist});
         case SET_MUSIC_NAME:
             return Object.assign({}, state, {musicName: action.musicName});
+        case SET_AUDIO_ELEMENT:
+            return Object.assign({},state,{audio:action.audio});
         default:
             return state;
     }

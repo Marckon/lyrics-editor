@@ -3,6 +3,7 @@ export const APPEND_TEXTLINE="APPEND_TEXTLINE";
 export const CLEAR_ALLTEXTLINES="CLEAR_ALLTEXTLINES";
 export const CHANGE_TIMESTAMP="CHANGE_TIMESTAMP";
 export const CHANGE_TEXTLINE="CHANGE_TEXTLINE";
+export const DELETE_LINE="DELETE_LINE";
 
 const appendTimeStamp=timeStamp=>({
     type:APPEND_TIMESTAMP,
@@ -30,10 +31,16 @@ const changeTextLine=(index,newText)=>({
     index
 });
 
+const deleteLine=index=>({
+   type:DELETE_LINE,
+   index
+});
+
 export {
     appendTextLine,
     appendTimeStamp,
     clearAllTextLines,
     changeTimeStamp,
-    changeTextLine
+    changeTextLine,
+    deleteLine
 }

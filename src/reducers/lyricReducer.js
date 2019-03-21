@@ -3,7 +3,7 @@ import {
     APPEND_TIMESTAMP,
     CHANGE_TEXTLINE,
     CHANGE_TIMESTAMP,
-    CLEAR_ALLTEXTLINES
+    CLEAR_ALLTEXTLINES, DELETE_LINE
 } from "../actions/lyricActions";
 
 
@@ -23,6 +23,12 @@ export const lyricReducer = (state, action) => {
             let tempTl = state.textLines;
             tempTl[action.index] = action.newText;
             return Object.assign({}, state, {textLines: tempTl});
+        case DELETE_LINE:
+            let tempTs1=state.timeStamps;
+            let tempTl1=state.textLines;
+            tempTs1.splice(action.index,1);
+            tempTl1.splice(action.index,1);
+            return Object.assign({},state,{timeStamps:tempTs1,textLines:tempTl1});
         default:
             return state;
     }
