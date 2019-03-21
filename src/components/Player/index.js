@@ -18,12 +18,12 @@ import {
 import styles from './index.scss';
 
 const Dragger = Upload.Dragger;
-const Player = () => {
+const Player = (props) => {
     const ctx = useContext(MusicContext);
     const audio = useRef(null);
 
     //定义dragger的参数
-    const props = {
+    const draggerProps = {
         multiple: false,
         beforeUpload: (file) => {
             //设置曲名
@@ -69,13 +69,15 @@ const Player = () => {
         audio.current.volume = value / 100;
     };
     return (
-        <div>
-            <Dragger {...props}>
-                <p className="ant-upload-drag-icon">
-                    <Icon type={"inbox"}/>
-                </p>
-                <p>点击或拖拽上传歌曲</p>
-            </Dragger>
+        <div className={props.className}>
+            <div className={styles.dragger}>
+                <Dragger {...draggerProps}>
+                    <p className="ant-upload-drag-icon">
+                        <Icon type={"inbox"}/>
+                    </p>
+                    <p>点击或拖拽上传歌曲</p>
+                </Dragger>
+            </div>
             <audio src={ctx.musicState.src}
                    autoPlay={true}
                    onCanPlay={canPlay}
@@ -112,14 +114,14 @@ const Player = () => {
             </Row>
             {/*进度条*/}
             <Row type={"flex"} align={"middle"}>
-                <Col span={21}>
+                <Col span={20}>
                     <Slider
                         value={ctx.musicState.currentTime / ctx.musicState.duration * 100}
                         onChange={changeCurrent}
                         step={0.01}
                         tipFormatter={tipFormatter}/>
                 </Col>
-                <Col span={3}>
+                <Col span={4}>
                     <span
                     >{getMinInMs(ctx.musicState.currentTime)}:{getSecInMs(ctx.musicState.currentTime)}/{getMinInMs(ctx.musicState.duration)}:{getSecInMs(ctx.musicState.duration)}</span>
                 </Col>

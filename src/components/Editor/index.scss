@@ -1,0 +1,16 @@
+.editor-panel{
+  height:150px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #533D5B;
+  border-radius: 10px;
+}
+.text-lines-area{
+  margin-top: 20px;
+  height:70vh;
+  overflow-y: scroll;
+  background-color: #fff;
+  border-radius: 10px;
+}
