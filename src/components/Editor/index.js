@@ -24,6 +24,8 @@ const Editor = (props) => {
 
     //展示歌词文件对话框
     const [showFileModal,setShowFileModal]=useState(false);
+    //歌词输入框禁用
+    const [canInput,setCanInput]=useState(true);
 
     //播放暂停
     const setPlayPause=()=>{
@@ -59,6 +61,12 @@ const Editor = (props) => {
         mctx.dispatch(setMusicCurrent(targetTime));
         mctx.dispatch(setMusicPlay(true));
         mctx.musicState.audio.current.play();
+    };
+    //测试歌词
+    const testLyric=()=>{
+        console.log(mctx.musicState.audio.current.currentTime)
+        setCanInput(!canInput);
+        return canInput;
     };
     //生成歌词文件
     const generateFile=()=>{
@@ -110,6 +118,8 @@ const Editor = (props) => {
                 clearAllLines={clearAllLines}
                 setPlayPause={setPlayPause}
                 generateFile={generateFile}
+                testLyric={testLyric}
+                isTest={!canInput}
             />
             <div className={styles.textLinesArea}>
                 {
@@ -122,7 +132,9 @@ const Editor = (props) => {
                             onPressEnter={stampTime}
                             onDeleteLine={onDeleteLine}
                             jumpPlay={jumpPlay}
-                            index={i}/>
+                            index={i}
+                            disabled={!canInput}
+                        />
                     ))
                 }
             </div>

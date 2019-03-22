@@ -25,6 +25,7 @@ const TextLine = (props) => {
                addonBefore={(<TimeStamp/>)}
                onChange={e => props.onChangeTextLine(e, props.index)}
                onPressEnter={props.onPressEnter}
+               disabled={props.disabled}
         />
     )
 };
