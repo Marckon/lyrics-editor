@@ -66,7 +66,25 @@ const Editor = (props) => {
     };
     //保存歌词文件
     const downloadFile=()=>{
-
+        //创建歌词文本
+        let fileText='';
+        lctx.lyricState.timeStamps.map((v,i)=>{
+            fileText+=`[${v}] ${lctx.lyricState.textLines[i]}`+'\n';
+        });
+        // 创建隐藏的可下载链接
+        var eleLink = document.createElement('a');
+        eleLink.download = `${mctx.musicState.musicName}.lrc`;
+        eleLink.style.display = 'none';
+        // 字符内容转变成blob地址
+        var blob = new Blob([fileText]);
+        eleLink.href = URL.createObjectURL(blob);
+        // 触发点击
+        document.body.appendChild(eleLink);
+        eleLink.click();
+        // 然后移除
+        document.body.removeChild(eleLink);
+        //关闭弹窗
+        setShowFileModal(false);
     };
     return (
         <div className={props.className}>
@@ -75,6 +93,8 @@ const Editor = (props) => {
                 visible={showFileModal}
                 onOk={downloadFile}
                 onCancel={()=>setShowFileModal(false)}
+                okText={"保存"}
+                cancelText={"取消"}
             >
                 {
                     lctx.lyricState.timeStamps.map((v,i)=>{
